@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Colors That Don't Suck</title>
+        <script src="scripts/vendor.js"></script>
+        <link rel="stylesheet" href="styles/master.css">
+    </head>
+    <body ng-app="CTDS">
+        
+        <div id="wrapper" ng-controller="mainController">
+            
+            <h1>Here are some that don't suck.</h1>
+    
+            <div class="colors">
+                <div class="color-row">
+                    <div class="color" ng-repeat="(color, value) in colors | limitTo: 4">
+                        <div class="color-square" style="background-color: {{ value }}"></div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    
+        <script defer src="scripts/main.js"></script>
+    
+    </body>
+</html>
