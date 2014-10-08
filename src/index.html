@@ -8,12 +8,41 @@
         
         <div id="wrapper" ng-controller="mainController">
             
-            <h1>Here are some that don't suck.</h1>
+            <h1>{{ heading }}</h1>
+            
+            <h2><a href="javascript:void(0)" ng-click="refresh()">{{ linkText }}</a></h2>
     
             <div class="colors">
-                <div class="color-row">
+                <div class="color-row" ng-class="{ 'two-colors': colors.length == 2, 'three-colors': colors.length == 3, 'four-colors': colors.length >= 4 }">
                     <div class="color" ng-repeat="(color, value) in colors | limitTo: 4">
-                        <div class="color-square" style="background-color: {{ value }}"></div>
+                        <div class="color-square" style="background-color: {{ value }}">
+                            <span class="color-value" style="color: {{ shadeColor(value, 35) }}">{{ value }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="debug_info" ng-show="debug_mode">
+                <p>Type: {{ type }}</p>
+                
+                <div class="slider">
+                    <span class="label">Hue</span>
+                    <div class="gutter">
+                        <div class="knob" style="margin-left: {{(( hue / 360) * 100 ) + '%' }}">&nbsp;</div>
+                    </div>
+                </div>
+                
+                <div class="slider">
+                    <span class="label">Saturation</span>
+                    <div class="gutter">
+                        <div class="knob" style="margin-left: {{( saturation * 100) + '%' }}">&nbsp;</div>
+                    </div>
+                </div>
+                
+                <div class="slider">
+                    <span class="label">Value</span>
+                    <div class="gutter">
+                        <div class="knob" style="margin-left: {{( value * 100) + '%' }}">&nbsp;</div>
                     </div>
                 </div>
             </div>
@@ -21,6 +50,5 @@
         </div>
     
         <script defer src="scripts/main.js"></script>
-    
     </body>
 </html>
