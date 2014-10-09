@@ -1,0 +1,66 @@
+.size( @width, @height ) {
+    width:  @width;
+    height: @height;
+}
+.square( @dim ) {
+    width:  @dim;
+    height: @dim;
+}
+
+// Hide + show
+.hide { display: none;  } .hidden()  { .hide; }
+.show { display: block; } .visible() { .show; }
+
+// Center block-level elements
+.centered { 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Quick floats
+.pull-right { float: right; }
+.pull-left  { float: left;  }
+
+.align-center { text-align: center; }
+.align-left   { text-align: left; }
+.align-right  { text-align: right; }
+
+// Set layout model to box-sizing
+.border-box { box-sizing: border-box; }
+
+// Clear floated elements
+.clearfix() {
+    &:before, &:after { display: table; content: ""; }
+    &:after { clear: both; }
+}   .clear { .clearfix(); }
+
+// Border Radius
+.border-radius(@radius: 3px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// Drop shadows
+.box-shadow(@shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+// Transitions
+.transition(@transition) {
+    -webkit-transition: @transition;
+       -moz-transition: @transition;
+        -ms-transition: @transition;
+         -o-transition: @transition;
+            transition: @transition;
+}
+
+.dr(){ background: rgba(255,0,0,0.2); }
+.dg(){ background: rgba(0,255,0,0.2); }
+.db(){ background: rgba(0,0,255,0.2); }
+
+.never-go-full-rounded() {
+    border-radius: 9999px;
+}

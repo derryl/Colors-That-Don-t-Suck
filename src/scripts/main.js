@@ -1,27 +1,21 @@
-window.log = console.log.bind(console);
-window.err = console.error.bind(console);
-window.glog = function(msg) { log('%c' + msg, 'color: green'); }
+window.log  = console.log.bind( console );
+window.err  = console.error.bind( console );
+window.glog = function( msg ) { log( '%c' + msg, 'color: green' ); }
+
+window.DEBUG_MODE = false;
 
 //
 //  MODULE
 //
-window.CTDS = angular.module( 'CTDS', ['ngRoute', 'LocalStorageModule']).config([
+window.CTDS = angular.module( 'CTDS', [ 'ngRoute', 'LocalStorageModule', 'ngClipboard' ]).config([
     '$compileProvider', function($compileProvider) {
         return $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|rdar|mailto|chrome-extension):/);
     }
+]).config([
+    'ngClipProvider', function(ngClipProvider) {
+        ngClipProvider.setPath('flash/ZeroClipboard.swf');
+    }
 ]);
-
-//
-//  ROUTES
-//
-// CTDS.config( function( $routeProvider ) {
-//     $routeProvider.when('/home', {
-//         templateUrl: 'colors.html',
-//         controller:  'mainController'
-//     }).otherwise({ redirectTo: '/home' });
-//     return false;
-// });
-
 
 //
 //  CONTROLLER
@@ -31,25 +25,27 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
     var $$ = $scope;
     window.scope = $$;
     
+    $$.debug_mode = DEBUG_MODE;
+    
     $$.heading = "Here are some colors that don't suck.";
     $$.linkText = "Actually, those kinda sucked ... hit me again.";
-    // $$.debug_mode = true;
     
     var store = localStorageService;
     
     $$.init = function() {
-        // $$.randomizeHeader();
         $$.generateColors();
     };
     
+    // Refresh color choices
     $$.refresh = function() {
         $$.randomizeMessaging();
         $$.generateColors();
     };
     
-    var random = function(ceiling, floor) {
+    // Generate random number between ceiling and floor
+    window.random = function(ceiling, floor) {
         var floor = floor || 0;
-        return (Math.random() * ceiling) + floor;
+        return (Math.random() * (ceiling - floor)) + floor;
     }
     
     $$.please = window.Please;
@@ -111,27 +107,73 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
         return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
     };
     
+    $$.formatValue = function(val) {
+        return Math.round(val * 100) / 100;
+    };
+    
     $$.generateColors = function() {
         
         $$.type = randomSchemeType();
         $$.hue  = random(360);
-        $$.saturation = random(0.2,0.6),
-        $$.value = random(0.2,0.6)
+        $$.saturation = random(0.8,0.6),
+        $$.value = random(0.8,0.6)
         
         $$.colors = Please.make_scheme(
         {
             h: $$.hue,
             s: $$.saturation,
             v: $$.value
-            // s: .7,
-            // v: .6
-        },
-        {
+        },{
             scheme_type: $$.type,
             format: 'hex'
         });
-        log($$.colors)
+        
+        if (DEBUG_MODE) {
+            logColorSettings();
+        }
+        
+        
+        $timeout( function() { morphie() });
+        $timeout( function() { $('button')[0].click() } )
     }
+    
+    $$.copiedSASS = function() {
+        $$.justCopiedSASS = true;
+        $timeout( function() {
+            $$.justCopiedSASS = false;
+        }, 1500);
+    };
+    
+    $$.copiedLESS = function() {
+        $$.justCopiedLESS = true;
+        $timeout( function() {
+            $$.justCopiedLESS = false;
+        }, 1500);
+    };
+    
+    $$.copiedJS = function() {
+        $$.justCopiedJS = true;
+        $timeout( function() {
+            $$.justCopiedJS = false;
+        }, 1500);
+    };
+    
+    
+    function logColorSettings() {
+        log('Hue:', $$.formatValue( $$.hue ));
+        log('Sat:', $$.formatValue( $$.saturation ));
+        log('Val:', $$.formatValue( $$.value ));
+        log($$.colors);
+    }
+    
+    $$.getCode = function(color, format) {
+        switch( format ) {
+            case 'sass': return '$my-color: ' + color + ';';
+            case 'less': return '@my-color: ' + color + ';';
+            case 'js':   return 'var myColor = ' + color + ';';
+        }
+    }
+    
     
     $$.init();
     // $$.api.getPictures(17993529);

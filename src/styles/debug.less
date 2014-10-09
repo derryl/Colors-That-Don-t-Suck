@@ -1,0 +1,42 @@
+//// Debug sliders
+.debug_info {
+    position: fixed;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    background: #fff;
+    padding: 20px 30px 30px;
+}
+.slider {
+    .clearfix;
+    width: 100%;
+    & + .slider { margin-top: 15px; }
+    
+    @label-width:   15%;
+    @gutter-height: 20px;
+    @knob-radius:   24px;
+    
+    .label {
+        width: @label-width;
+        float: left;
+    }
+    
+    .gutter {
+        float: left;
+        width: 100% - @label-width;
+        height: @gutter-height;
+        position: relative;
+        background: #ccc;
+        // overflow: hidden;
+        .never-go-full-rounded;
+    }
+    
+    .knob {
+        // position: absolute;
+        margin-top: -2px;
+        height: @knob-radius;
+        width:  @knob-radius;
+        background: red;
+        .never-go-full-rounded
+    }
+}

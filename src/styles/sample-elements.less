@@ -1,0 +1,53 @@
+.sample-element-container {
+    text-align: center;
+    
+    .row {
+        padding: 20px 0;
+    }
+    
+    p {
+        margin: 0;
+        font-weight: bold;
+        text-align: left;
+        padding: 0 5px 0 20px;
+    }
+}
+
+
+.btn {
+    display: inline-block;
+    font-weight: bold;
+    width: 140px;
+    padding: 5px 25px 6px;
+    height: 42px;
+    vertical-align: middle;
+    font-size: 17px;
+    border-bottom: 0;
+    
+    &.solid {
+        color: #fff;
+        padding-top: 6px;
+        padding-bottom: 7px;
+    }
+    
+    &.rounded {
+        border-radius: 5px;
+        // .never-go-full-rounded();
+        // padding-left: 15px;
+        // padding-right: 15px;
+    }
+    
+    &.bordered {
+        border: 2px solid #f00;
+    }
+
+    & + .btn {
+        margin-left: 15px;
+    }
+}
+
+
+.ico {
+    font-size: 1.7em;
+    & + .ico { margin-left: 20px; }
+}
