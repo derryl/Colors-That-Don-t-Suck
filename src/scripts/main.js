@@ -134,7 +134,7 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
         
         
         $timeout( function() { morphie() });
-        $timeout( function() { $('button')[0].click() } )
+        // $timeout( function() { $('button')[0].click() } )
     }
     
     $$.copiedSASS = function() {
