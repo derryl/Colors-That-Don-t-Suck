@@ -8,118 +8,82 @@
         
         <div id="wrapper" ng-controller="mainController">
             
-            <h1>{{ heading }}</h1>
-            
-            <h2><a href="javascript:void(0)" ng-click="refresh()">{{ linkText }}</a></h2>
-    
-            <!-- <div class="colors">
-                <div class="color-row" ng-class="{ 'two-colors': colors.length == 2, 'three-colors': colors.length == 3, 'four-colors': colors.length >= 4 }">
-                    <div class="color" ng-repeat="(color, value) in colors | limitTo: 2">
-                        <div class="color-square" style="background-color: {{ value }}">
-                            <span class="color-value" style="color: {{ shadeColor(value, 35) }}">{{ value }}</span>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <div class="page_title">
+                <h1>{{ heading }}</h1>
+                <h2><a href="javascript:void(0)" ng-click="refresh()">{{ linkText }}</a></h2>
+            </div>
             
             <div class="colors">
-                <div class="color-row">
-                    <div class="color morph-button morph-button-modal morph-button-modal-2 morph-button-fixed" ng-repeat="(color, value) in colors | limitTo: 2" style="background-color: {{ value }}">
-                    
-                        <!-- Button to launch modal -->
-                        <button type="button" style="background-color: {{ value }}"></button>
+            
+                <div class="color color-details" ng-repeat="(color, value) in colors | limitTo: 2">
                         
-                        <!-- Color: Detail view -->
-                        <div class="morph-content">
-                            <div>
-                                <div class="color-modal">
-                                
-                                    <span class="icon icon-close">Close the dialog</span>
-                                    
-                                    <div class="modal-header" style="background: {{ value }}">
-                                    
-                                        <!-- <div class="swatch" style="background-color: {{ value }}"></div> -->
-                                    
-                                        <h2 style="background-color: {{ value }}">{{ value }}</h2>
-                                        
-                                    </div>
-                                    
-                                    <div class="modal-details md--left">
-                                        
-                                        <div class="modal-detail-item">
-                                            <span class="mdi--label">SASS</span>
-                                            <span class="mdi--content">
-                                                <pre style="border-color: {{ value }}"><code>
+                    <div class="detail-header" style="background: {{ value }}">
+                        <h2 style="background-color: {{ value }}">{{ value }}</h2>
+                    </div>
+                    
+                    <!-- <div class="modal-details md--left">
+                        
+                        <div class="modal-detail-item">
+                            <span class="mdi--label">SASS</span>
+                            <span class="mdi--content">
+                                <pre style="border-color: {{ value }}"><code>
 {{ getCode( value, 'sass' ) }}
-                                                </code><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'sass' )" ng-hide="justCopiedSASS" ng-click="copiedSASS()">Copy</a><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'sass' )" ng-show="justCopiedSASS" style="color: {{ value }}">Copied!</a></pre>
-                                            </span>
-                                        </div>
-                                        
-                                        <div class="modal-detail-item">
-                                            <span class="mdi--label">LESS</span>
-                                            <span class="mdi--content">
-                                                <pre style="border-color: {{ value }}"><code>
-{{ getCode( value, 'less' ) }}
-                                                </code><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'less' )" ng-hide="justCopiedLESS" ng-click="copiedLESS()">Copy</a><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'less' )" ng-show="justCopiedLESS" style="color: {{ value }}">Copied!</a></pre>
-                                            </span>
-                                        </div>
-                                        
-                                        <div class="modal-detail-item">
-                                            <span class="mdi--label">JavaScript</span>
-                                            <span class="mdi--content">
-                                                <pre style="border-color: {{ value }}"><code>
-{{ getCode( value, 'js' ) }}
-                                                </code><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'js' )" ng-hide="justCopiedJS" ng-click="copiedJS()">Copy</a><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'js' )" ng-show="justCopiedJS" style="color: {{ value }}">Copied!</a></pre>
-                                            </span>
-                                        </div>
-                                        
-                                    </div>
-                                    
-                                    <div class="modal-details md--right sample-element-container">
-                                        
-                                        <div class="row">
-                                            <a href="javascript:void(0)" class="btn solid" style="background: {{ value }}; border-bottom: 1px solid {{ shadeColor(value, -15) }}">Button</a>
-                                            <a href="javascript:void(0)" class="btn rounded bordered" style="border-color: {{ value }}; color: {{ value }}">Button</a>
-                                            <a href="javascript:void(0)" class="btn rounded solid" style="background: {{ value }}; text-shadow: 0 -1px 0 {{ shadeColor(value, -15) }}">Button</a>
-                                        </div>
-                                        
-                                        <div class="row" style="color: {{ value }}">
-                                            <div class="ico ico-cog"></div>
-                                            <div class="ico ico-home"></div>
-                                            <div class="ico ico-minus"></div>
-                                            <div class="ico ico-caret-square-o-down"></div>
-                                            <div class="ico ico-expand"></div>
-                                            <div class="ico ico-file"></div>
-                                            <div class="ico ico-folder"></div>
-                                            <div class="ico ico-list-ul"></div>
-                                        </div>
-                                        
-                                        <div class="row" style="color: {{ value }}">
-                                            <div class="ico ico-code"></div>
-                                            <div class="ico ico-align-left"></div>
-                                            <div class="ico ico-apple"></div>
-                                            <div class="ico ico-android"></div>
-                                            <div class="ico ico-anchor"></div>
-                                            <div class="ico ico-check-circle"></div>
-                                        </div>
-                                        
-                                        <div class="row" style="color: {{ value }}">
-                                            <p>Walter, you can't do that. These guys're like me, they're pacifists. Smokey was a conscientious objector. Turpis &hellip;</p>
-                                        </div>
-                                        
-                                        
-                                    </div>
-                                    <!-- <form>
-                                        <p><label>Email</label><input type="text" /></p>
-                                        <p><label>Password</label><input type="password" /></p>
-                                        <p><button>Login</button></p>
-                                    </form> -->
-                                </div>
-                            </div>
+                                </code><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'sass' )" ng-hide="justCopiedSASS" ng-click="copiedSASS()">Copy</a><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'sass' )" ng-show="justCopiedSASS" style="color: {{ value }}">Copied!</a></pre>
+                            </span>
                         </div>
                         
-                        <!-- Hex code, displayed on swatch -->
-                        <span class="color-value" style="color: {{ shadeColor(value, 35) }}">{{ value }}</span>
+                        <div class="modal-detail-item">
+                            <span class="mdi--label">LESS</span>
+                            <span class="mdi--content">
+                                <pre style="border-color: {{ value }}"><code>
+{{ getCode( value, 'less' ) }}
+                                </code><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'less' )" ng-hide="justCopiedLESS" ng-click="copiedLESS()">Copy</a><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'less' )" ng-show="justCopiedLESS" style="color: {{ value }}">Copied!</a></pre>
+                            </span>
+                        </div>
+                        
+                        <div class="modal-detail-item">
+                            <span class="mdi--label">JavaScript</span>
+                            <span class="mdi--content">
+                                <pre style="border-color: {{ value }}"><code>
+{{ getCode( value, 'js' ) }}
+                                </code><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'js' )" ng-hide="justCopiedJS" ng-click="copiedJS()">Copy</a><a href="javascript:void(0)" class="copy-text" clip-copy="getCode( value, 'js' )" ng-show="justCopiedJS" style="color: {{ value }}">Copied!</a></pre>
+                            </span>
+                        </div>
+                        
+                    </div> --> <!-- end .md-left -->
+                    
+                    <div class="sample-element-container">
+                        
+                        <div class="row">
+                            <!-- <a href="javascript:void(0)" class="btn solid" style="background: {{ value }}; border-bottom: 1px solid {{ shadeColor(value, -15) }}">Button</a> -->
+                            <a href="javascript:void(0)" class="btn rounded bordered" style="border-color: {{ value }}; color: {{ value }}">Button</a>
+                            <a href="javascript:void(0)" class="btn rounded solid" style="background: {{ value }}; text-shadow: 0 -1px 0 {{ shadeColor(value, -15) }}">Button</a>
+                        </div>
+                        
+                        <div class="row" style="color: {{ value }}">
+                            <div class="ico ico-cog"></div>
+                            <div class="ico ico-home"></div>
+                            <div class="ico ico-minus"></div>
+                            <div class="ico ico-caret-square-o-down"></div>
+                            <div class="ico ico-expand"></div>
+                            <div class="ico ico-file"></div>
+                            <div class="ico ico-folder"></div>
+                            <div class="ico ico-list-ul"></div>
+                        </div>
+                        
+                        <div class="row" style="color: {{ value }}">
+                            <div class="ico ico-code"></div>
+                            <div class="ico ico-align-left"></div>
+                            <div class="ico ico-apple"></div>
+                            <div class="ico ico-android"></div>
+                            <div class="ico ico-anchor"></div>
+                            <div class="ico ico-check-circle"></div>
+                        </div>
+                        
+                        <div class="row">
+                            <p>Walter, you can't do that. These guys're like me, <a href="javascript:void(0)" style="color: {{ value }}; border-color: {{ value }}">they're pacifists</a>. Smokey was a conscientious objector. Turpis &hellip;</p>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -150,8 +114,7 @@
             </div>
             
         </div>
-    
-        <script defer src="scripts/morph.js"></script>
+
         <script defer src="scripts/main.js"></script>
     </body>
 </html>
