@@ -1,5 +1,47 @@
+.colors {
+    .clearfix;
+    text-align: center;
+    width: 95%;
+    margin: 0 auto;
+}
 
-// COLOR MODAL
+.color {
+    @color-width: 46%;
+    position: relative;
+    float: left;
+    width: @color-width;
+    padding: 25px;
+    background: #fff;
+    margin: 0 (100% - (@color-width * 2)) / 4;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.075);
+}
+
+.color-square {
+    display: block;
+    width: 100%;
+    height: 300px;
+    // padding-bottom: 100%;
+    background: #eee;
+    border-radius: 5px;
+    position: relative;
+    border: 5px solid #f8f8f8;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.color-value {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: rgba(0,0,0,0.6);
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 1001;
+}
+
+
+// COLOR DETAILS
 
 @modal-swatch-size: 7.3em;
 
@@ -40,11 +82,16 @@
 
 
 .modal-details {
-    padding: 30px;
-    float: left;
+    .clearfix;
+    .row {
+        width: 100%;
+        .clearfix;
+    }
+    // padding: 30px;
+    // float: left;
 }
-.md--left  { width: 40%; padding-right: 15px; }
-.md--right { width: 60%; padding-left: 15px; }
+// .md--left  { width: 40%; padding-right: 15px; }
+// .md--right { width: 60%; padding-left: 15px; }
 
 .modal-detail-item {
     & + .modal-detail-item {

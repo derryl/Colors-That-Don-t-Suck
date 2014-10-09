@@ -56,7 +56,7 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
         
         var headers = [
             "What about these ones?",
-            "Try these on some buttons.",
+            "Try these on for size.",
             "You won't find these in Bootstrap.",
             "If these came on sneakers - I'd wear em.",
             "These would make some bitchin' Crayons.",
@@ -67,7 +67,7 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
             "How bout these ones?"
         ], links = [
             "Those actually sucked worse than before.",
-            "Ehh, I'd be better off going Aqua.",
+            "Ehh, I'd be better off with Aqua buttons.",
             "I actually prefer theirs. Let's see some more.",
             "Yeah, I bet you would.",
             "You must've eaten glue as a kid. Hit me again.",
@@ -92,12 +92,12 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
     
     var randomSchemeType = function() {
         var types = [
-            // "mono",
+            "mono",
             "triadic",
             "complementary",
             // "double-complementary",
-            // "split-complementary",
-            // "analogous"
+            "split-complementary",
+            "analogous"
         ];
         return types[Math.floor(Math.random()*types.length)]
     };
@@ -133,7 +133,7 @@ CTDS.controller( 'mainController', function($scope, localStorageService, $rootSc
         }
         
         
-        $timeout( function() { morphie() });
+        // $timeout( function() { morphie() });
         // $timeout( function() { $('button')[0].click() } )
     }
     

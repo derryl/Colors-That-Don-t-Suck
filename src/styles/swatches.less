@@ -1,12 +1,13 @@
 .colors {
-    // display: table;
+    .clearfix;
+    display: table;
     // table-layout: fixed;
     width: 100%;
     text-align: center;
 }
 
 .color-row {
-    // display: table-row;
+    display: table-row;
     .clearfix;
     width: 100%;
     position: relative;
@@ -15,19 +16,21 @@
 .color {
     position: relative;
     // display: inline-block;
+    // float: left;
     // width: 49%;
     // padding: 20px;
-    // display: table-cell;
-    // padding: 20px;
+    display: table-cell;
+    padding: 20px;
 }
 
 .color-square {
     display: block;
     width: 100%;
-    height: 300px;
-    // padding-bottom: 100%;
+    // height: 300px;
+    .never-go-full-rounded();
+    padding-bottom: 100%;
     background: #eee;
-    border-radius: 5px;
+    // border-radius: 5px;
     position: relative;
     border: 5px solid #f8f8f8;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
